@@ -3,6 +3,8 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8_16.c
@@ -11,15 +13,29 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"45 D:\Backup\Documentos\GitHub\Lab04\main.c
+"65 D:\Backup\Documentos\GitHub\Lab04\main.c
 [v _isr isr `II(v  1 e 1 0 ]
-"58
+"83
 [v _main main `(v  1 e 1 0 ]
-"64
+"107
 [v _setup setup `(v  1 e 1 0 ]
-"71
+"116
 [v _setup_portb setup_portb `(v  1 e 1 0 ]
-"229 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
+"125
+[v _setup_ADC setup_ADC `(v  1 e 1 0 ]
+[s S177 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+"184 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
+[u S186 . 1 `S177 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES186  1 e 1 @5 ]
+"229
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
 [s S23 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
@@ -35,7 +51,9 @@
 [v _PORTBbits PORTBbits `VES32  1 e 1 @6 ]
 "291
 [v _PORTC PORTC `VEuc  1 e 1 @7 ]
-[s S45 . 1 `uc 1 RBIF 1 0 :1:0 
+"353
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+[s S51 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -45,14 +63,39 @@
 `uc 1 GIE 1 0 :1:7 
 ]
 "483
-[s S54 . 1 `uc 1 . 1 0 :2:0 
+[s S60 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 TMR0IE 1 0 :1:5 
 ]
-[u S59 . 1 `S45 1 . 1 0 `S54 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES59  1 e 1 @11 ]
-[s S91 . 1 `uc 1 PS 1 0 :3:0 
+[u S65 . 1 `S51 1 . 1 0 `S60 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES65  1 e 1 @11 ]
+"1239
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+[s S96 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+`uc 1 ADCS 1 0 :2:6 
+]
+"1277
+[s S101 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 ADCS0 1 0 :1:6 
+`uc 1 ADCS1 1 0 :1:7 
+]
+[s S110 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S113 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[u S116 . 1 `S96 1 . 1 0 `S101 1 . 1 0 `S110 1 . 1 0 `S113 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES116  1 e 1 @31 ]
+[s S151 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -60,41 +103,102 @@
 `uc 1 nRBPU 1 0 :1:7 
 ]
 "1367
-[s S98 . 1 `uc 1 PS0 1 0 :1:0 
+[s S158 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
 ]
-[u S102 . 1 `S91 1 . 1 0 `S98 1 . 1 0 ]
-[v _OPTION_REGbits OPTION_REGbits `VES102  1 e 1 @129 ]
+[u S162 . 1 `S151 1 . 1 0 `S158 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES162  1 e 1 @129 ]
+[s S198 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1434
+[u S207 . 1 `S198 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES207  1 e 1 @133 ]
 "1479
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
 "1541
 [v _TRISC TRISC `VEuc  1 e 1 @135 ]
+"1603
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
 "2347
 [v _WPUB WPUB `VEuc  1 e 1 @149 ]
 "2417
 [v _IOCB IOCB `VEuc  1 e 1 @150 ]
+[s S240 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 VCFG0 1 0 :1:4 
+`uc 1 VCFG1 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 ADFM 1 0 :1:7 
+]
+"2992
+[u S246 . 1 `S240 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES246  1 e 1 @159 ]
+[s S219 . 1 `uc 1 ANS0 1 0 :1:0 
+`uc 1 ANS1 1 0 :1:1 
+`uc 1 ANS2 1 0 :1:2 
+`uc 1 ANS3 1 0 :1:3 
+`uc 1 ANS4 1 0 :1:4 
+`uc 1 ANS5 1 0 :1:5 
+`uc 1 ANS6 1 0 :1:6 
+`uc 1 ANS7 1 0 :1:7 
+]
+"3405
+[u S228 . 1 `S219 1 . 1 0 ]
+[v _ANSELbits ANSELbits `VES228  1 e 1 @392 ]
 "3450
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"3592
+[v _ADIF ADIF `VEb  1 e 0 @102 ]
 "4135
 [v _RBIF RBIF `VEb  1 e 0 @88 ]
-"58 D:\Backup\Documentos\GitHub\Lab04\main.c
+"45 D:\Backup\Documentos\GitHub\Lab04\main.c
+[v _DISP1 DISP1 `i  1 e 2 0 ]
+"46
+[v _DISP2 DISP2 `i  1 e 2 0 ]
+"47
+[v _display display `[16]uc  1 e 16 0 ]
+"83
 [v _main main `(v  1 e 1 0 ]
 {
-"63
+"106
 } 0
-"71
+"116
 [v _setup_portb setup_portb `(v  1 e 1 0 ]
 {
-"78
+"124
 } 0
-"64
+"125
+[v _setup_ADC setup_ADC `(v  1 e 1 0 ]
+{
+"146
+} 0
+"107
 [v _setup setup `(v  1 e 1 0 ]
 {
-"70
+"115
 } 0
-"45
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 6 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 5 ]
+[v ___awdiv@counter counter `uc  1 a 1 4 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 0 ]
+[v ___awdiv@dividend dividend `i  1 p 2 2 ]
+"41
+} 0
+"65 D:\Backup\Documentos\GitHub\Lab04\main.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"57
+"82
 } 0
