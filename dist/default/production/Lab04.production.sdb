@@ -11,12 +11,90 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"44 D:\Backup\Documentos\GitHub\Lab04\main.c
+"45 D:\Backup\Documentos\GitHub\Lab04\main.c
+[v _isr isr `II(v  1 e 1 0 ]
+"58
 [v _main main `(v  1 e 1 0 ]
-"167 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
-[v _PORTA PORTA `VEuc  1 e 1 @5 ]
-"44 D:\Backup\Documentos\GitHub\Lab04\main.c
+"64
+[v _setup setup `(v  1 e 1 0 ]
+"71
+[v _setup_portb setup_portb `(v  1 e 1 0 ]
+"229 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+[s S23 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"246
+[u S32 . 1 `S23 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES32  1 e 1 @6 ]
+"291
+[v _PORTC PORTC `VEuc  1 e 1 @7 ]
+[s S45 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"483
+[s S54 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 TMR0IE 1 0 :1:5 
+]
+[u S59 . 1 `S45 1 . 1 0 `S54 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES59  1 e 1 @11 ]
+[s S91 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+"1367
+[s S98 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+]
+[u S102 . 1 `S91 1 . 1 0 `S98 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES102  1 e 1 @129 ]
+"1479
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1541
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+"2347
+[v _WPUB WPUB `VEuc  1 e 1 @149 ]
+"2417
+[v _IOCB IOCB `VEuc  1 e 1 @150 ]
+"3450
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+"4135
+[v _RBIF RBIF `VEb  1 e 0 @88 ]
+"58 D:\Backup\Documentos\GitHub\Lab04\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"46
+"63
+} 0
+"71
+[v _setup_portb setup_portb `(v  1 e 1 0 ]
+{
+"78
+} 0
+"64
+[v _setup setup `(v  1 e 1 0 ]
+{
+"70
+} 0
+"45
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"57
 } 0

@@ -2659,10 +2659,39 @@ extern __bank0 __bit __timeout;
 
 
 void setup(void);
+void setup_portb(void);
 
+void __attribute__((picinterrupt(("")))) isr (void){
+    if (RBIF == 1){
+    if (PORTBbits.RB0 == 0)
+    {
+        PORTC++;
+        INTCONbits.RBIF = 0;
+    }
+    else if (PORTBbits.RB1 == 0){
+        PORTC--;
+        INTCONbits.RBIF = 0;
+    }
+    }
+}
 void main(void) {
-
+    setup();
+    setup_portb();
+    while (1){
+    }
 }
 void setup(void){
-    PORTA = 0;
+    ANSELH = 0;
+    TRISB = 0b00000111;
+    TRISC = 0;
+    PORTB = 0;
+    PORTC = 0;
+}
+void setup_portb(void){
+    INTCONbits.GIE = 1;
+    INTCONbits.RBIE = 1;
+    INTCONbits.RBIF = 0;
+    IOCB = 0b00000111;
+    WPUB = 0b00000111;
+    OPTION_REGbits.nRBPU = 0;
 }
