@@ -39,11 +39,20 @@
 #include <xc.h>
 #define _XTAL_FREQ 4000000
 
+//******************************************************************************
+// Definición de funciones y variables
+//******************************************************************************
 void setup(void);
 void setup_portb(void);
 void setup_ADC(void);
+void Comparador(void);
+
 int DISP1 = 0;
 int DISP2 = 0;
+
+//******************************************************************************
+// Arreglo para los valores del display
+//******************************************************************************
 uint8_t display[16] = {
     0b00111111, 
     0b00000110, 
@@ -62,70 +71,86 @@ uint8_t display[16] = {
     0b01111001,
     0b01110001};
 
+//******************************************************************************
+// Función de interrupciones
+//******************************************************************************
 void __interrupt() isr (void){
-    if (RBIF == 1){
-    if (PORTBbits.RB6 == 0)
+    if (RBIF == 1){             // Revisa si hay interrupción del puerto B
+    if (PORTBbits.RB6 == 0)     // Si hay revisa si se presionó RB6
     {
-        __delay_ms(30);
-        if (PORTBbits.RB6 == 1){
-            PORTC++;
-            INTCONbits.RBIF = 0;
+        __delay_ms(30);         // Hace un delay para el antirrebote
+        if (PORTBbits.RB6 == 1){// Revisa si ya se dejó de presionar
+            PORTC++;            // Incrementa el puerto del contador
+            INTCONbits.RBIF = 0;// Apaga la bandera de interrupción
         }
     }
-    else if (PORTBbits.RB7 == 0){
-        __delay_ms(30);
-        if (PORTBbits.RB7 == 1){
-            PORTC--;
-            INTCONbits.RBIF = 0;}
+    else if (PORTBbits.RB7 == 0){// Revisa si se presionó RB7
+        __delay_ms(30);          // Hace un delay para antirrebotes
+        if (PORTBbits.RB7 == 1){ // Revisa si ya se dejó de presionar el botón
+            PORTC--;             // Decrementa el puerto del contador
+            INTCONbits.RBIF = 0;}// Apaga la bandera de interrupciones
     }
     }
 }
+//******************************************************************************
+// Función principal
+//******************************************************************************
 void main(void) {
-    setup();
-    setup_portb();
-    setup_ADC();
-    PORTD = display[0];
+    setup();            // Configuraciones inciales
+    setup_portb();      // Configuración de interrupción del puerto B
+    setup_ADC();        // Configuración del ADC
+    PORTD = display[0]; // Asigna inicialmente un valor de 0 al puerto del disp
     while (1){
-        ADCON0bits.GO = 1;
-        while (ADCON0bits.GO == 1);
-        ADIF = 0;
-        DISP1 = (ADRESH%16);
-        DISP2 = (ADRESH/16);           
-        if (PORTBbits.RB0 == 1){
-            PORTD = display[DISP1];
-            PORTBbits.RB0 = 0;
-            PORTBbits.RB1 = 1;
+        ADCON0bits.GO = 1; // Inicia el ADC
+        while (ADCON0bits.GO == 1); // Revisa si ya terminó la conversión ADC
+        ADIF = 0;               // Apaga la bandera del ADC
+        DISP1 = (ADRESH%16);    // Carga el residuo del resultado en 16 a DISP1
+        DISP2 = (ADRESH/16);    // Carga el cociente del resultado dividido 16
+        Comparador();           // Compara contador con el ADC
+        if (PORTBbits.RB0 == 1){// Revisa cuál display está encendido
+            PORTD = display[DISP1]; // Carga el valor del que está encendido 
+            PORTBbits.RB0 = 0;      // Apaga el display que estaba encendido
+            PORTBbits.RB1 = 1;      // Enciende el que corresponde
             }
-        else if(PORTBbits.RB1 == 1){
-            PORTD = display[DISP2];
-            PORTBbits.RB0 = 1;
-            PORTBbits.RB1 = 0;
+        else if(PORTBbits.RB1 == 1){// Revisa cuál display está encendido
+            PORTD = display[DISP2]; // Carga el valor correspondiente
+            PORTBbits.RB0 = 1;      // Enciende el que toca
+            PORTBbits.RB1 = 0;      // Apaga el que estaba encendido
             }
-        __delay_ms(5); 
+        __delay_ms(5);              // Espera 5ms y vuelve al ciclo
     }
 }
+//******************************************************************************
+// Configuración de puertos
+//******************************************************************************
 void setup(void){
     ANSELH = 0;
-    TRISB = 0b11100000;
+    TRISB = 0b11000000; // Dos pines son entradas
     TRISC = 0; 
     TRISD = 0;
     PORTC = 0;
     PORTB = 1;
     PORTD = 0;
 }
+//******************************************************************************
+// Configuración del puerto B
+//******************************************************************************
 void setup_portb(void){
-    INTCONbits.GIE = 1;
-    INTCONbits.RBIE = 1;
-    INTCONbits.RBIF = 0;
-    IOCB = 0b11100000;
-    WPUB = 0b11100000;
-    OPTION_REGbits.nRBPU = 0;
+    INTCONbits.GIE = 1;     // Habilita interrupciones globales
+    INTCONbits.RBIE = 1;    // Habilita interrupción del puerto B
+    INTCONbits.RBIF = 0;    // Apaga la bandera de interrupción del puerto B
+    IOCB = 0b11000000;      // Habilita la interrupción en cambio
+    WPUB = 0b11000000;      // Habilita el Weak Pull-Up en el puerto B
+    OPTION_REGbits.nRBPU = 0;   // Deshabilita el bit de RBPU
     
 }
+//******************************************************************************
+// Configuración del ADC
+//******************************************************************************
 void setup_ADC(void){
-    PORTAbits.RA0 = 0;
-    TRISAbits.TRISA0 = 1;
-    ANSELbits.ANS0 = 1;
+    PORTAbits.RA0 = 0;      // Inicia el bit 0 de PORTA en 0
+    TRISAbits.TRISA0 = 1;   // RA0 es entrada
+    ANSELbits.ANS0 = 1;     // RA0 es analógico
     
     ADCON0bits.ADCS1 = 0;
     ADCON0bits.ADCS0 = 1;   // Fosc/8
@@ -142,6 +167,16 @@ void setup_ADC(void){
     
     ADCON0bits.ADON = 1;        // Habilitar el convertidor ADC
     __delay_us(100);
-    
+}
+//******************************************************************************
+// Función para comparar el contador con los displays
+//******************************************************************************
+void Comparador(void){
+    if (ADRESH >= PORTC){   // Revisa si el resultado de la conversión es mayor
+        PORTBbits.RB5 = 1;  // que el contador. Si si, enciende RB5
+    }
+    else {
+        PORTBbits.RB5 = 0;  // Si no, lo apaga
+    } 
 }
 

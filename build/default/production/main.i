@@ -2658,11 +2658,20 @@ extern __bank0 __bit __timeout;
 
 
 
+
+
+
 void setup(void);
 void setup_portb(void);
 void setup_ADC(void);
+void Comparador(void);
+
 int DISP1 = 0;
 int DISP2 = 0;
+
+
+
+
 uint8_t display[16] = {
     0b00111111,
     0b00000110,
@@ -2680,6 +2689,9 @@ uint8_t display[16] = {
     0b01011110,
     0b01111001,
     0b01110001};
+
+
+
 
 void __attribute__((picinterrupt(("")))) isr (void){
     if (RBIF == 1){
@@ -2699,6 +2711,9 @@ void __attribute__((picinterrupt(("")))) isr (void){
     }
     }
 }
+
+
+
 void main(void) {
     setup();
     setup_portb();
@@ -2710,6 +2725,7 @@ void main(void) {
         ADIF = 0;
         DISP1 = (ADRESH%16);
         DISP2 = (ADRESH/16);
+        Comparador();
         if (PORTBbits.RB0 == 1){
             PORTD = display[DISP1];
             PORTBbits.RB0 = 0;
@@ -2723,24 +2739,33 @@ void main(void) {
         _delay((unsigned long)((5)*(4000000/4000.0)));
     }
 }
+
+
+
 void setup(void){
     ANSELH = 0;
-    TRISB = 0b11100000;
+    TRISB = 0b11000000;
     TRISC = 0;
     TRISD = 0;
     PORTC = 0;
     PORTB = 1;
     PORTD = 0;
 }
+
+
+
 void setup_portb(void){
     INTCONbits.GIE = 1;
     INTCONbits.RBIE = 1;
     INTCONbits.RBIF = 0;
-    IOCB = 0b11100000;
-    WPUB = 0b11100000;
+    IOCB = 0b11000000;
+    WPUB = 0b11000000;
     OPTION_REGbits.nRBPU = 0;
 
 }
+
+
+
 void setup_ADC(void){
     PORTAbits.RA0 = 0;
     TRISAbits.TRISA0 = 1;
@@ -2761,5 +2786,15 @@ void setup_ADC(void){
 
     ADCON0bits.ADON = 1;
     _delay((unsigned long)((100)*(4000000/4000000.0)));
+}
 
+
+
+void Comparador(void){
+    if (ADRESH >= PORTC){
+        PORTBbits.RB5 = 1;
+    }
+    else {
+        PORTBbits.RB5 = 0;
+    }
 }
